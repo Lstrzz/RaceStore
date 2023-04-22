@@ -1,0 +1,688 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище RaceStoreDbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Addres">
+          <Key>
+            <PropertyRef Name="AddresID" />
+          </Key>
+          <Property Name="AddresID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pindex" Type="int" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Street" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Nunhome" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Numkv" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChaProducts">
+          <Key>
+            <PropertyRef Name="ChaProdID" />
+          </Key>
+          <Property Name="ChaProdID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="ProdKolvo" Type="int" Nullable="false" />
+          <Property Name="ChaTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChaTypes">
+          <Key>
+            <PropertyRef Name="ChaTypeID" />
+          </Key>
+          <Property Name="ChaTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChaTitle" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Offices">
+          <Key>
+            <PropertyRef Name="OfficeID" />
+          </Key>
+          <Property Name="OfficeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OfficeTitle" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="AddresID" Type="int" Nullable="false" />
+          <Property Name="StorageID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Info" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Kolvo" Type="int" Nullable="false" />
+          <Property Name="TypeProductID" Type="int" Nullable="false" />
+          <Property Name="ProviderID" Type="int" Nullable="false" />
+          <Property Name="StorageID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Provides">
+          <Key>
+            <PropertyRef Name="ProviderID" />
+          </Key>
+          <Property Name="ProviderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProviderTitle" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RolTitle" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Storages">
+          <Key>
+            <PropertyRef Name="StorageID" />
+          </Key>
+          <Property Name="StorageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StorageTitle" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeProducts">
+          <Key>
+            <PropertyRef Name="TypeProductID" />
+          </Key>
+          <Property Name="TypeProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeTitle" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Logg" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pass" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fname" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Iname" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Oname" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="OfficeID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__ChaProduc__ChaTy__4A8310C6">
+          <End Role="ChaTypes" Type="Self.ChaTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ChaProducts" Type="Self.ChaProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChaTypes">
+              <PropertyRef Name="ChaTypeID" />
+            </Principal>
+            <Dependent Role="ChaProducts">
+              <PropertyRef Name="ChaTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChaProduc__Produ__498EEC8D">
+          <End Role="Products" Type="Self.Products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ChaProducts" Type="Self.ChaProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ChaProducts">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Offices__AddresI__3A4CA8FD">
+          <End Role="Addres" Type="Self.Addres" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Offices" Type="Self.Offices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addres">
+              <PropertyRef Name="AddresID" />
+            </Principal>
+            <Dependent Role="Offices">
+              <PropertyRef Name="AddresID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Offices__Storage__3B40CD36">
+          <End Role="Storages" Type="Self.Storages" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Offices" Type="Self.Offices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storages">
+              <PropertyRef Name="StorageID" />
+            </Principal>
+            <Dependent Role="Offices">
+              <PropertyRef Name="StorageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__Provid__43D61337">
+          <End Role="Provides" Type="Self.Provides" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provides">
+              <PropertyRef Name="ProviderID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__Storag__44CA3770">
+          <End Role="Storages" Type="Self.Storages" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storages">
+              <PropertyRef Name="StorageID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="StorageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__TypePr__42E1EEFE">
+          <End Role="TypeProducts" Type="Self.TypeProducts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeProducts">
+              <PropertyRef Name="TypeProductID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="TypeProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__OfficeID__3F115E1A">
+          <End Role="Offices" Type="Self.Offices" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Offices">
+              <PropertyRef Name="OfficeID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="OfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleID__40058253">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище RaceStoreDbModelContainer">
+          <EntitySet Name="Addres" EntityType="Self.Addres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChaProducts" EntityType="Self.ChaProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChaTypes" EntityType="Self.ChaTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Offices" EntityType="Self.Offices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provides" EntityType="Self.Provides" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Storages" EntityType="Self.Storages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeProducts" EntityType="Self.TypeProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ChaProduc__ChaTy__4A8310C6" Association="Self.FK__ChaProduc__ChaTy__4A8310C6">
+            <End Role="ChaTypes" EntitySet="ChaTypes" />
+            <End Role="ChaProducts" EntitySet="ChaProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChaProduc__Produ__498EEC8D" Association="Self.FK__ChaProduc__Produ__498EEC8D">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ChaProducts" EntitySet="ChaProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Offices__AddresI__3A4CA8FD" Association="Self.FK__Offices__AddresI__3A4CA8FD">
+            <End Role="Addres" EntitySet="Addres" />
+            <End Role="Offices" EntitySet="Offices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Offices__Storage__3B40CD36" Association="Self.FK__Offices__Storage__3B40CD36">
+            <End Role="Storages" EntitySet="Storages" />
+            <End Role="Offices" EntitySet="Offices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__Provid__43D61337" Association="Self.FK__Products__Provid__43D61337">
+            <End Role="Provides" EntitySet="Provides" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__Storag__44CA3770" Association="Self.FK__Products__Storag__44CA3770">
+            <End Role="Storages" EntitySet="Storages" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__TypePr__42E1EEFE" Association="Self.FK__Products__TypePr__42E1EEFE">
+            <End Role="TypeProducts" EntitySet="TypeProducts" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__OfficeID__3F115E1A" Association="Self.FK__Users__OfficeID__3F115E1A">
+            <End Role="Offices" EntitySet="Offices" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleID__40058253" Association="Self.FK__Users__RoleID__40058253">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RaceStoreDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Addres">
+          <Key>
+            <PropertyRef Name="AddresID" />
+          </Key>
+          <Property Name="AddresID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pindex" Type="Int32" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nunhome" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Numkv" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Offices" Relationship="Self.FK__Offices__AddresI__3A4CA8FD" FromRole="Addres" ToRole="Offices" />
+        </EntityType>
+        <EntityType Name="ChaProducts">
+          <Key>
+            <PropertyRef Name="ChaProdID" />
+          </Key>
+          <Property Name="ChaProdID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="ProdKolvo" Type="Int32" Nullable="false" />
+          <Property Name="ChaTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ChaTypes" Relationship="Self.FK__ChaProduc__ChaTy__4A8310C6" FromRole="ChaProducts" ToRole="ChaTypes" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__ChaProduc__Produ__498EEC8D" FromRole="ChaProducts" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="ChaTypes">
+          <Key>
+            <PropertyRef Name="ChaTypeID" />
+          </Key>
+          <Property Name="ChaTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChaTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ChaProducts" Relationship="Self.FK__ChaProduc__ChaTy__4A8310C6" FromRole="ChaTypes" ToRole="ChaProducts" />
+        </EntityType>
+        <EntityType Name="Offices">
+          <Key>
+            <PropertyRef Name="OfficeID" />
+          </Key>
+          <Property Name="OfficeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OfficeTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AddresID" Type="Int32" Nullable="false" />
+          <Property Name="StorageID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Addres" Relationship="Self.FK__Offices__AddresI__3A4CA8FD" FromRole="Offices" ToRole="Addres" />
+          <NavigationProperty Name="Storages" Relationship="Self.FK__Offices__Storage__3B40CD36" FromRole="Offices" ToRole="Storages" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__OfficeID__3F115E1A" FromRole="Offices" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Info" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Kolvo" Type="Int32" Nullable="false" />
+          <Property Name="TypeProductID" Type="Int32" Nullable="false" />
+          <Property Name="ProviderID" Type="Int32" Nullable="false" />
+          <Property Name="StorageID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ChaProducts" Relationship="Self.FK__ChaProduc__Produ__498EEC8D" FromRole="Products" ToRole="ChaProducts" />
+          <NavigationProperty Name="Provides" Relationship="Self.FK__Products__Provid__43D61337" FromRole="Products" ToRole="Provides" />
+          <NavigationProperty Name="Storages" Relationship="Self.FK__Products__Storag__44CA3770" FromRole="Products" ToRole="Storages" />
+          <NavigationProperty Name="TypeProducts" Relationship="Self.FK__Products__TypePr__42E1EEFE" FromRole="Products" ToRole="TypeProducts" />
+        </EntityType>
+        <EntityType Name="Provides">
+          <Key>
+            <PropertyRef Name="ProviderID" />
+          </Key>
+          <Property Name="ProviderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProviderTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Products__Provid__43D61337" FromRole="Provides" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RolTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleID__40058253" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Storages">
+          <Key>
+            <PropertyRef Name="StorageID" />
+          </Key>
+          <Property Name="StorageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StorageTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Offices" Relationship="Self.FK__Offices__Storage__3B40CD36" FromRole="Storages" ToRole="Offices" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Products__Storag__44CA3770" FromRole="Storages" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="TypeProducts">
+          <Key>
+            <PropertyRef Name="TypeProductID" />
+          </Key>
+          <Property Name="TypeProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Products__TypePr__42E1EEFE" FromRole="TypeProducts" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Logg" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Iname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Oname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OfficeID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Offices" Relationship="Self.FK__Users__OfficeID__3F115E1A" FromRole="Users" ToRole="Offices" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__Users__RoleID__40058253" FromRole="Users" ToRole="Roles" />
+        </EntityType>
+        <Association Name="FK__Offices__AddresI__3A4CA8FD">
+          <End Role="Addres" Type="Self.Addres" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Offices" Type="Self.Offices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addres">
+              <PropertyRef Name="AddresID" />
+            </Principal>
+            <Dependent Role="Offices">
+              <PropertyRef Name="AddresID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChaProduc__ChaTy__4A8310C6">
+          <End Role="ChaTypes" Type="Self.ChaTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ChaProducts" Type="Self.ChaProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChaTypes">
+              <PropertyRef Name="ChaTypeID" />
+            </Principal>
+            <Dependent Role="ChaProducts">
+              <PropertyRef Name="ChaTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChaProduc__Produ__498EEC8D">
+          <End Role="Products" Type="Self.Products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ChaProducts" Type="Self.ChaProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ChaProducts">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Offices__Storage__3B40CD36">
+          <End Role="Storages" Type="Self.Storages" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Offices" Type="Self.Offices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storages">
+              <PropertyRef Name="StorageID" />
+            </Principal>
+            <Dependent Role="Offices">
+              <PropertyRef Name="StorageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__OfficeID__3F115E1A">
+          <End Role="Offices" Type="Self.Offices" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Offices">
+              <PropertyRef Name="OfficeID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="OfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__Provid__43D61337">
+          <End Role="Provides" Type="Self.Provides" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provides">
+              <PropertyRef Name="ProviderID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__Storag__44CA3770">
+          <End Role="Storages" Type="Self.Storages" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storages">
+              <PropertyRef Name="StorageID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="StorageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__TypePr__42E1EEFE">
+          <End Role="TypeProducts" Type="Self.TypeProducts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeProducts">
+              <PropertyRef Name="TypeProductID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="TypeProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleID__40058253">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RaceStoreDbEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Addres" EntityType="Self.Addres" />
+          <EntitySet Name="ChaProducts" EntityType="Self.ChaProducts" />
+          <EntitySet Name="ChaTypes" EntityType="Self.ChaTypes" />
+          <EntitySet Name="Offices" EntityType="Self.Offices" />
+          <EntitySet Name="Products" EntityType="Self.Products" />
+          <EntitySet Name="Provides" EntityType="Self.Provides" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Storages" EntityType="Self.Storages" />
+          <EntitySet Name="TypeProducts" EntityType="Self.TypeProducts" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK__Offices__AddresI__3A4CA8FD" Association="Self.FK__Offices__AddresI__3A4CA8FD">
+            <End Role="Addres" EntitySet="Addres" />
+            <End Role="Offices" EntitySet="Offices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChaProduc__ChaTy__4A8310C6" Association="Self.FK__ChaProduc__ChaTy__4A8310C6">
+            <End Role="ChaTypes" EntitySet="ChaTypes" />
+            <End Role="ChaProducts" EntitySet="ChaProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChaProduc__Produ__498EEC8D" Association="Self.FK__ChaProduc__Produ__498EEC8D">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ChaProducts" EntitySet="ChaProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Offices__Storage__3B40CD36" Association="Self.FK__Offices__Storage__3B40CD36">
+            <End Role="Storages" EntitySet="Storages" />
+            <End Role="Offices" EntitySet="Offices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__OfficeID__3F115E1A" Association="Self.FK__Users__OfficeID__3F115E1A">
+            <End Role="Offices" EntitySet="Offices" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__Provid__43D61337" Association="Self.FK__Products__Provid__43D61337">
+            <End Role="Provides" EntitySet="Provides" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__Storag__44CA3770" Association="Self.FK__Products__Storag__44CA3770">
+            <End Role="Storages" EntitySet="Storages" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__TypePr__42E1EEFE" Association="Self.FK__Products__TypePr__42E1EEFE">
+            <End Role="TypeProducts" EntitySet="TypeProducts" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleID__40058253" Association="Self.FK__Users__RoleID__40058253">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище RaceStoreDbModelContainer" CdmEntityContainer="RaceStoreDbEntities2">
+          <EntitySetMapping Name="Addres">
+            <EntityTypeMapping TypeName="RaceStoreDbModel.Addres">
+              <MappingFragment StoreEntitySet="Addres">
+                <ScalarProperty Name="AddresID" ColumnName="AddresID" />
+                <ScalarProperty Name="Pindex" ColumnName="Pindex" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Nunhome" ColumnName="Nunhome" />
+                <ScalarProperty Name="Numkv" ColumnName="Numkv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChaProducts">
+            <EntityTypeMapping TypeName="RaceStoreDbModel.ChaProducts">
+              <MappingFragment StoreEntitySet="ChaProducts">
+                <ScalarProperty Name="ChaProdID" ColumnName="ChaProdID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProdKolvo" ColumnName="ProdKolvo" />
+                <ScalarProperty Name="ChaTypeID" ColumnName="ChaTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChaTypes">
+            <EntityTypeMapping TypeName="RaceStoreDbModel.ChaTypes">
+              <MappingFragment StoreEntitySet="ChaTypes">
+                <ScalarProperty Name="ChaTypeID" ColumnName="ChaTypeID" />
+                <ScalarProperty Name="ChaTitle" ColumnName="ChaTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Offices">
+            <EntityTypeMapping TypeName="RaceStoreDbModel.Offices">
+              <MappingFragment StoreEntitySet="Offices">
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
+                <ScalarProperty Name="OfficeTitle" ColumnName="OfficeTitle" />
+                <ScalarProperty Name="AddresID" ColumnName="AddresID" />
+                <ScalarProperty Name="StorageID" ColumnName="StorageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="RaceStoreDbModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductTitle" ColumnName="ProductTitle" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Kolvo" ColumnName="Kolvo" />
+                <ScalarProperty Name="TypeProductID" ColumnName="TypeProductID" />
+                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+                <ScalarProperty Name="StorageID" ColumnName="StorageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provides">
+            <EntityTypeMapping TypeName="RaceStoreDbModel.Provides">
+              <MappingFragment StoreEntitySet="Provides">
+                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+                <ScalarProperty Name="ProviderTitle" ColumnName="ProviderTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="RaceStoreDbModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RolTitle" ColumnName="RolTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Storages">
+            <EntityTypeMapping TypeName="RaceStoreDbModel.Storages">
+              <MappingFragment StoreEntitySet="Storages">
+                <ScalarProperty Name="StorageID" ColumnName="StorageID" />
+                <ScalarProperty Name="StorageTitle" ColumnName="StorageTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeProducts">
+            <EntityTypeMapping TypeName="RaceStoreDbModel.TypeProducts">
+              <MappingFragment StoreEntitySet="TypeProducts">
+                <ScalarProperty Name="TypeProductID" ColumnName="TypeProductID" />
+                <ScalarProperty Name="TypeTitle" ColumnName="TypeTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="RaceStoreDbModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Logg" ColumnName="Logg" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Iname" ColumnName="Iname" />
+                <ScalarProperty Name="Oname" ColumnName="Oname" />
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
