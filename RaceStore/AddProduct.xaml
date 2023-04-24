@@ -1,0 +1,34 @@
+﻿<Window x:Class="RaceStore.AddProduct"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RaceStore"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Добавить товар" Height="450" Width="900" WindowStartupLocation="CenterScreen">
+    <Grid Background="Azure">
+        <materialDesign:Card Margin="100,50,100,50">
+            <StackPanel>
+                <Label Content="Создать товар" HorizontalAlignment="Center" FontSize="20" Foreground="LimeGreen" FontWeight="Bold" Margin="0,15,0,0"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel>
+                        <TextBox Width="200" x:Name="ProductTitleTb" Margin="15,20,15,0" materialDesign:HintAssist.Hint="Название" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                        <TextBox x:Name="InfoTb" Margin="15,10,15,0" materialDesign:HintAssist.Hint="Описание" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                        <TextBox x:Name="PriceTb" Margin="15,10,15,0" materialDesign:HintAssist.Hint="Цена" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                        <TextBox x:Name="KolvoTb" Margin="15,10,15,0" materialDesign:HintAssist.Hint="Количество" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <ComboBox Width="200" x:Name="TypeProductsTb" DisplayMemberPath="TypeTitle" Margin="15,20,15,0" materialDesign:HintAssist.Hint="Категория" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+                        <ComboBox x:Name="ProvidesTb" Margin="15,10,15,0" DisplayMemberPath="ProviderTitle" materialDesign:HintAssist.Hint="Производитель" Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEditable="True"/>
+                        <ComboBox x:Name="StoragesTb" Margin="15,10,15,0" DisplayMemberPath="StorageTitle" materialDesign:HintAssist.Hint="Склад" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Margin="15,20,10,10" Width="95" Content="Создать" Foreground="White" FontSize="16" Click="Button_Click"/>
+                            <Button Margin="0,20,15,10" Width="95"  Content="Отмена" Foreground="White" FontSize="16" IsCancel="True"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </materialDesign:Card>
+    </Grid>
+</Window>

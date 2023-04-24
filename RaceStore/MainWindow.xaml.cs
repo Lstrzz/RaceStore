@@ -74,5 +74,47 @@ namespace RaceStore
                 this.Close();
             }
         }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            AddProduct addProduct = new AddProduct();
+            if(addProduct.ShowDialog() == true)
+            {
+                ProductsDG.ItemsSource = Helper.GetContext().Products.ToList();
+            }
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            Products products =(Products)ProductsDG.SelectedItem;
+            if(products!=null)
+            {
+                if (MessageBox.Show("Вы действительно хотите удалить продукт?", "Удалить продукт", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    Helper.GetContext().Products.Remove(products);
+                    Helper.GetContext().SaveChanges();
+                }
+                ProductsDG.ItemsSource = Helper.GetContext().Products.ToList();
+            }
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            ProvidersWindow providersWindow = new ProvidersWindow();
+            providersWindow.ShowDialog();
+        }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            Products products = (Products)ProductsDG.SelectedItem;
+            if (products != null)
+            {
+                EdtProduct edtProduct = new EdtProduct(products.ProductID);
+                if(edtProduct.ShowDialog() == true)
+                {
+                    ProductsDG.ItemsSource = Helper.GetContext().Products.ToList();
+                }
+            }
+        }
     }
 }

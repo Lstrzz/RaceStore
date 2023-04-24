@@ -17,7 +17,7 @@
                     </StackPanel>
                 </TabItem.Header>
                 <StackPanel Margin="10">
-                    <DataGrid x:Name="UsersDG" MaxHeight="300"  AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid x:Name="UsersDG" MaxHeight="250"  AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Логин" Binding="{Binding Logg}"/>
                             <DataGridTextColumn Header="ФИО" Binding="{Binding FIO}"/>
@@ -40,7 +40,7 @@
                     </StackPanel>
                 </TabItem.Header>
                 <StackPanel Margin="10">
-                    <DataGrid x:Name="ProductsDG" MaxHeight="300"  AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid x:Name="ProductsDG" MaxHeight="250"  AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Название" Binding="{Binding ProductTitle}"/>
                             <DataGridTextColumn Header="Описание" Binding="{Binding Info}"/>
@@ -51,9 +51,10 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel Orientation="Horizontal">
-                        <Button Margin="0,10,10,0"  Content="Создать" Foreground="White" FontSize="16"/>
-                        <Button Margin="0,10,10,0"  Content="Изменить" Foreground="White" FontSize="16"/>
-                        <Button Margin="0,10,10,0"  Content="Удалить" Foreground="White" FontSize="16"/>
+                        <Button Margin="0,10,10,0"  Content="Создать" Foreground="White" FontSize="16" Click="Button_Click_4"/>
+                        <Button Margin="0,10,10,0"  Content="Изменить" Foreground="White" FontSize="16" Click="Button_Click_7"/>
+                        <Button Margin="0,10,10,0"  Content="Удалить" Foreground="White" FontSize="16" Click="Button_Click_5"/>
+                        <Button Margin="0,10,10,0"  Content="Производители" Foreground="White" FontSize="16" Click="Button_Click_6"/>
                     </StackPanel>
                 </StackPanel>
             </TabItem>
@@ -65,7 +66,7 @@
                     </StackPanel>
                 </TabItem.Header>
                 <StackPanel Margin="10">
-                    <DataGrid x:Name="OfficesDG" MaxHeight="300"  AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid x:Name="OfficesDG" MaxHeight="250"  AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Название" Binding="{Binding OfficeTitle}"/>
                             <DataGridTextColumn Header="Склад" Binding="{Binding Storages.StorageTitle}"/>

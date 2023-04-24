@@ -34,5 +34,16 @@ namespace RaceStore
         public virtual Provides Provides { get; set; }
         public virtual Storages Storages { get; set; }
         public virtual TypeProducts TypeProducts { get; set; }
+
+        public Products(string productTitle, string info, string price, int kolvo, int typeProductID, int providerID, int storageID)
+        {
+            ProductTitle = productTitle;
+            Info = info;
+            Price = price;
+            Kolvo = kolvo;
+            TypeProductID = typeProductID;
+            ProviderID = providerID;
+            StorageID = storageID;
+        }
     }
 }
