@@ -51,25 +51,6 @@ namespace RaceStore
             Offices offices1 = Helper.GetContext().Offices.FirstOrDefault(o => o.OfficeTitle == OfficeTb.Text);
             if (OfficeTb.Text != "" && OfficeTb.Text != offices.OfficeTitle) users.OfficeID = offices1.OfficeID;
             Helper.GetContext().SaveChanges();
-
-
-            OfficeTb.ItemsSource = Helper.GetContext().Offices.ToList();
-            RoleTb.ItemsSource = Helper.GetContext().Roles.ToList();
-            Users users3 = Helper.GetContext().Users.FirstOrDefault(u => u.UserID == UserID);
-            Roles roles3 = Helper.GetContext().Roles.FirstOrDefault(r => r.RoleID == users.RoleID);
-            Offices offices3 = Helper.GetContext().Offices.FirstOrDefault(o => o.OfficeID == users.OfficeID);
-            FTb.Text = users3.Fname;
-            ITb.Text = users3.Iname;
-            OTb.Text = users3.Oname;
-            LoggTb.Text = users3.Logg;
-            OfficeTb.Text = offices3.OfficeTitle;
-            RoleTb.Text = roles3.RolTitle;
-            PassTb.Password = "";
-            Pass1Tb.Password = "";
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
             this.DialogResult = true;
         }
     }

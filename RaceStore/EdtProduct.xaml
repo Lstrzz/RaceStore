@@ -20,7 +20,7 @@
                     </StackPanel>
                     <StackPanel>
                         <ComboBox Width="210" x:Name="TypeProductsTb" DisplayMemberPath="TypeTitle" Margin="15,20,15,0" materialDesign:HintAssist.Hint="Категория" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
-                        <ComboBox x:Name="ProvidesTb" Margin="15,10,15,0" DisplayMemberPath="ProviderTitle" materialDesign:HintAssist.Hint="Производитель" Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEditable="True"/>
+                        <ComboBox x:Name="ProvidesTb" Margin="15,10,15,0" DisplayMemberPath="ProviderTitle" materialDesign:HintAssist.Hint="Производитель" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
                         <ComboBox x:Name="StoragesTb" Margin="15,10,15,0" DisplayMemberPath="StorageTitle" materialDesign:HintAssist.Hint="Склад" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
                         <StackPanel Orientation="Horizontal">
                             <Button Margin="15,20,10,10" Width="110" Content="Изменить" Foreground="White" FontSize="16" Click="Button_Click"/>
