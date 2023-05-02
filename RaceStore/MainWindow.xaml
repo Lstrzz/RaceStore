@@ -17,6 +17,7 @@
                     </StackPanel>
                 </TabItem.Header>
                 <StackPanel Margin="10">
+                    <TextBox Name="Search" Width="400" Margin="5,10,15,5" materialDesign:HintAssist.Hint="Поиск..." Style="{StaticResource MaterialDesignOutlinedTextBox}" HorizontalAlignment="Left" KeyUp="OfficeTitleTb_KeyUp"/>
                     <DataGrid x:Name="UsersDG" MaxHeight="250"  AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Логин" Binding="{Binding Logg}"/>
@@ -79,6 +80,16 @@
                         <Button Margin="0,10,10,0"  Content="Удалить" Foreground="White" FontSize="16" Click="Button_Click_9"/>
                     </StackPanel>
                 </StackPanel>
+            </TabItem>
+            <TabItem Width="100">
+                <TabItem.Header>
+                    <StackPanel>
+                        <materialDesign:PackIcon HorizontalAlignment="Center" Kind="PackageVariantClosed" Width="40" Height="40" Foreground="LimeGreen"/>
+                        <TextBlock  HorizontalAlignment="Center" Text="Движения" />
+                    </StackPanel>
+                </TabItem.Header>
+            <StackPanel Margin="10">
+            </StackPanel>
             </TabItem>
         </TabControl>
         <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,10,10,10" Height="50" Width="60" Click="Button_Click_3">

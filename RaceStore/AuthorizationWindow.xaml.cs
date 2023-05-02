@@ -35,6 +35,12 @@ namespace RaceStore
                     main.Show();
                     this.Close();
                 }
+                else if (user != null && user.RoleID == 2)
+                {
+                    ManagerWindow managerWindow = new ManagerWindow(user.UserID);
+                    managerWindow.Show();
+                    this.Close();
+                }
                 else MessageBox.Show("Пользователь не найден", "Ошибка");
             }
         }

@@ -21,5 +21,13 @@ namespace RaceStore
     
         public virtual ChaTypes ChaTypes { get; set; }
         public virtual Products Products { get; set; }
+
+        public ChaProducts() { }
+        public ChaProducts(int productID, int prodKolvo, int chaTypeID)
+        {
+            ProductID = productID;
+            ProdKolvo = prodKolvo;
+            ChaTypeID = chaTypeID;
+        }
     }
 }

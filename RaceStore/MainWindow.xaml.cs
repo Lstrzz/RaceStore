@@ -152,5 +152,11 @@ namespace RaceStore
                 }
             }
         }
+
+        private void OfficeTitleTb_KeyUp(object sender, KeyEventArgs e)
+        {
+            List<Users> users = Helper.GetContext().Users.ToList();
+            UsersDG.ItemsSource = users.Where(u => u.FIO.IndexOf(Search.Text) != -1);
+        }
     }
 }
