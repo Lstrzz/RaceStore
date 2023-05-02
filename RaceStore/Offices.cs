@@ -29,5 +29,13 @@ namespace RaceStore
         public virtual Storages Storages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Users> Users { get; set; }
+
+
+        public Offices( string officeTitle, int addresID, int storageID)
+        {
+            OfficeTitle = officeTitle;
+            AddresID = addresID;
+            StorageID = storageID;
+        }
     }
 }

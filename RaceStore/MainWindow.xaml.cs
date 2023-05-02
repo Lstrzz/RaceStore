@@ -116,5 +116,41 @@ namespace RaceStore
                 }
             }
         }
+
+        private void Button_Click_8(object sender, RoutedEventArgs e)
+        {
+            ddOffice ddOffice = new ddOffice();
+            if(ddOffice.ShowDialog() == true)
+            {
+                OfficesDG.ItemsSource = Helper.GetContext().Offices.ToList();
+            }
+        }
+
+        private void Button_Click_9(object sender, RoutedEventArgs e)
+        {
+            Offices offices =(Offices)OfficesDG.SelectedItem; 
+            if (offices != null) 
+            {
+                if (MessageBox.Show("Вы действительно хотите удалить филиал?", "Удалить филиал", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    Helper.GetContext().Offices.Remove(offices);
+                    Helper.GetContext().SaveChanges();
+                }
+                OfficesDG.ItemsSource = Helper.GetContext().Offices.ToList();
+            }
+        }
+
+        private void Button_Click_10(object sender, RoutedEventArgs e)
+        {
+            Offices offices = (Offices)OfficesDG.SelectedItem;
+            if (offices != null)
+            {
+                EdtOffice edtOffice = new EdtOffice(offices.OfficeID);
+                if (edtOffice.ShowDialog() == true)
+                {
+                    OfficesDG.ItemsSource = Helper.GetContext().Offices.ToList();
+                }
+            }
+        }
     }
 }

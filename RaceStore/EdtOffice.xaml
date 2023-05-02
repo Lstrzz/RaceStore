@@ -1,0 +1,34 @@
+﻿<Window x:Class="RaceStore.EdtOffice"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RaceStore"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Изменить филиал" Height="450" Width="900" WindowStartupLocation="CenterScreen">
+    <Grid Background="Azure">
+        <materialDesign:Card Margin="200,40,200,30">
+            <StackPanel>
+                <Label Content="Изменить филиал" HorizontalAlignment="Center" FontSize="20" Foreground="LimeGreen" FontWeight="Bold" Margin="0,15,0,0"/>
+                <TextBox Width="430" x:Name="OfficeTitleTb" Margin="5,10,15,0" materialDesign:HintAssist.Hint="Название" Style="{StaticResource MaterialDesignOutlinedTextBox}" HorizontalContentAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel>
+                        <TextBox Width="200" x:Name="StorageTitleTb" Margin="0,10,10,0" materialDesign:HintAssist.Hint="Название склада" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                        <TextBox Width="200" x:Name="CityTb" Margin="0,10,10,0" materialDesign:HintAssist.Hint="Город" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                        <TextBox Width="200" x:Name="StreetTb" Margin="0,10,10,0" materialDesign:HintAssist.Hint="Улица" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBox Width="210" x:Name="NunhomeTb" Margin="10,10,10,0" materialDesign:HintAssist.Hint="Дом" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                        <TextBox Width="210" x:Name="NumkvTb" Margin="10,10,10,0" materialDesign:HintAssist.Hint="Квартира" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                        <TextBox Width="210" x:Name="PindexTb" Margin="0,10,0,0" materialDesign:HintAssist.Hint="Индекс" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                        <StackPanel Orientation="Horizontal" >
+                            <Button Margin="10,10,10,0" Width="110" Content="Изменить" Foreground="White" FontSize="16" Click="Button_Click"/>
+                            <Button Margin="0,10,0,0" Width="90"  Content="Отмена" Foreground="White" FontSize="16" IsCancel="True"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </materialDesign:Card>
+    </Grid>
+</Window>

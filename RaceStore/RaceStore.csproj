@@ -94,6 +94,12 @@
     <Compile Include="ChaTypes.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ddOffice.xaml.cs">
+      <DependentUpon>ddOffice.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EdtOffice.xaml.cs">
+      <DependentUpon>EdtOffice.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EdtProduct.xaml.cs">
       <DependentUpon>EdtProduct.xaml</DependentUpon>
     </Compile>
@@ -139,6 +145,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AuthorizationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ddOffice.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EdtOffice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
