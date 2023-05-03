@@ -28,6 +28,7 @@ namespace RaceStore
             offices = Helper.GetContext().Offices.FirstOrDefault(o => o.OfficeID == users.OfficeID);
             ProductsDG.ItemsSource = Helper.GetContext().Products.Where(p=>p.StorageID ==offices.StorageID).ToList();
             ProductsOrderDG.ItemsSource = Helper.GetContext().Products.Where(p => p.StorageID != offices.StorageID).ToList();
+            ChaProdDG.ItemsSource = Helper.GetContext().ChaProducts.Where(c => c.StorageID == offices.StorageID&&c.ChaTypeID==5).ToList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -63,6 +64,48 @@ namespace RaceStore
                 {
                     List<Products> products1 = Helper.GetContext().Products.ToList();
                     ProductsDG.ItemsSource = products1.Where(p => p.StorageID == offices.StorageID && p.ProductTitle.IndexOf(Search.Text) != -1);
+                }
+            }
+        }
+
+        private void c1_Click(object sender, RoutedEventArgs e)
+        {
+            c2.IsChecked = false;
+            ChaProdDG.ItemsSource = Helper.GetContext().ChaProducts.Where(c => c.StorageID == offices.StorageID&&c.ChaTypeID == 5).ToList();
+        }
+
+        private void c2_Click(object sender, RoutedEventArgs e)
+        {
+            c1.IsChecked = false;
+            ChaProdDG.ItemsSource = Helper.GetContext().ChaProducts.Where(c => c.Products.StorageID == offices.StorageID&&c.ChaTypeID == 5).ToList();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Products products = (Products)ProductsOrderDG.SelectedItem;
+            if(products != null)
+            {
+                OrderWindow orderWindow = new OrderWindow(products.ProductID,offices.StorageID);
+                if(orderWindow.ShowDialog()==true)
+                {
+                    ProductsOrderDG.ItemsSource = Helper.GetContext().Products.Where(p => p.StorageID != offices.StorageID).ToList();
+                    ChaProdDG.ItemsSource = Helper.GetContext().ChaProducts.Where(c => c.StorageID == offices.StorageID && c.ChaTypeID == 5).ToList();
+                }
+            }
+        }
+
+        private void mdk(object sender, MouseButtonEventArgs e)
+        {
+            if (c2.IsChecked == true)
+            {
+                ChaProducts chaProducts = (ChaProducts)ChaProdDG.SelectedItem;
+                if (chaProducts != null)
+                {
+                    EdtStatusOrderWindow edtStatusOrderWindow = new EdtStatusOrderWindow(chaProducts.ChaProdID);
+                    if (edtStatusOrderWindow.ShowDialog() == true)
+                    {
+                        ChaProdDG.ItemsSource = Helper.GetContext().ChaProducts.Where(c =>c.Products.StorageID == offices.StorageID && c.ChaTypeID == 5).ToList();
+                    }
                 }
             }
         }

@@ -26,6 +26,7 @@ namespace RaceStore
             UsersDG.ItemsSource = Helper.GetContext().Users.ToList();
             ProductsDG.ItemsSource = Helper.GetContext() .Products.ToList();
             OfficesDG.ItemsSource = Helper .GetContext().Offices.ToList();
+            ChaProdDG.ItemsSource = Helper.GetContext().ChaProducts.ToList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

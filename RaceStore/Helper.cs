@@ -8,12 +8,12 @@ namespace RaceStore
 {
     internal class Helper
     {
-        private static RaceStoreDbEntities2 db;
-        public static RaceStoreDbEntities2 GetContext()
+        private static RaceStoreDbEntities3 db;
+        public static RaceStoreDbEntities3 GetContext()
         {
             if (db == null)
             {
-                db = new RaceStoreDbEntities2();
+                db = new RaceStoreDbEntities3();
             }
             return db;
         }

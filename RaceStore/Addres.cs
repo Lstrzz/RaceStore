@@ -29,11 +29,7 @@ namespace RaceStore
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Offices> Offices { get; set; }
-
-
-        public string FullAddres => "г." +City + " ул."+Street + " Дом "+Nunhome + " Кв." +Numkv + " Индекс: "+Pindex;
-
-        public Addres(int pindex, string city, string street, string nunhome, int numkv)
+        public Addres( int pindex, string city, string street, string nunhome, int numkv)
         {
             Pindex = pindex;
             City = city;
@@ -41,5 +37,6 @@ namespace RaceStore
             Nunhome = nunhome;
             Numkv = numkv;
         }
+        public string FullAddres => "г." + City + " ул." + Street + " Дом " + Nunhome + " Кв." + Numkv + " Индекс: " + Pindex;
     }
 }

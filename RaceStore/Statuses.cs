@@ -12,28 +12,18 @@ namespace RaceStore
     using System;
     using System.Collections.Generic;
     
-    public partial class Storages
+    public partial class Statuses
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Storages()
+        public Statuses()
         {
             this.ChaProducts = new HashSet<ChaProducts>();
-            this.Offices = new HashSet<Offices>();
-            this.Products = new HashSet<Products>();
         }
     
-        public int StorageID { get; set; }
-        public string StorageTitle { get; set; }
+        public int StatuseID { get; set; }
+        public string StatuseTitle { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChaProducts> ChaProducts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Offices> Offices { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Products> Products { get; set; }
-        public Storages(string storageTitle)
-        {
-            StorageTitle = storageTitle;
-        }
     }
 }

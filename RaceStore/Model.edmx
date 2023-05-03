@@ -24,6 +24,9 @@
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="ProdKolvo" Type="int" Nullable="false" />
           <Property Name="ChaTypeID" Type="int" Nullable="false" />
+          <Property Name="Time" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="StorageID" Type="int" Nullable="false" />
+          <Property Name="StatuseID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ChaTypes">
           <Key>
@@ -68,6 +71,13 @@
           <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RolTitle" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="StatuseID" />
+          </Key>
+          <Property Name="StatuseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatuseTitle" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
         <EntityType Name="Storages">
           <Key>
             <PropertyRef Name="StorageID" />
@@ -95,7 +105,7 @@
           <Property Name="OfficeID" Type="int" Nullable="false" />
           <Property Name="RoleID" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__ChaProduc__ChaTy__4A8310C6">
+        <Association Name="FK__ChaProduc__ChaTy__6CD828CA">
           <End Role="ChaTypes" Type="Self.ChaTypes" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -109,7 +119,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ChaProduc__Produ__498EEC8D">
+        <Association Name="FK__ChaProduc__Produ__6BE40491">
           <End Role="Products" Type="Self.Products" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -123,7 +133,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Offices__AddresI__3A4CA8FD">
+        <Association Name="FK__ChaProduc__Statu__6EC0713C">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ChaProducts" Type="Self.ChaProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="StatuseID" />
+            </Principal>
+            <Dependent Role="ChaProducts">
+              <PropertyRef Name="StatuseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChaProduc__Stora__6DCC4D03">
+          <End Role="Storages" Type="Self.Storages" Multiplicity="1" />
+          <End Role="ChaProducts" Type="Self.ChaProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storages">
+              <PropertyRef Name="StorageID" />
+            </Principal>
+            <Dependent Role="ChaProducts">
+              <PropertyRef Name="StorageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Offices__AddresI__56E8E7AB">
           <End Role="Addres" Type="Self.Addres" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -137,7 +173,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Offices__Storage__3B40CD36">
+        <Association Name="FK__Offices__Storage__57DD0BE4">
           <End Role="Storages" Type="Self.Storages" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -151,7 +187,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__Provid__43D61337">
+        <Association Name="FK__Products__Provid__5F7E2DAC">
           <End Role="Provides" Type="Self.Provides" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -165,7 +201,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__Storag__44CA3770">
+        <Association Name="FK__Products__Storag__607251E5">
           <End Role="Storages" Type="Self.Storages" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -179,7 +215,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__TypePr__42E1EEFE">
+        <Association Name="FK__Products__TypePr__5E8A0973">
           <End Role="TypeProducts" Type="Self.TypeProducts" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -193,7 +229,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Users__OfficeID__3F115E1A">
+        <Association Name="FK__Users__OfficeID__5AB9788F">
           <End Role="Offices" Type="Self.Offices" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -207,7 +243,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Users__RoleID__40058253">
+        <Association Name="FK__Users__RoleID__5BAD9CC8">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -229,42 +265,51 @@
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provides" EntityType="Self.Provides" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statuses" EntityType="Self.Statuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Storages" EntityType="Self.Storages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeProducts" EntityType="Self.TypeProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__ChaProduc__ChaTy__4A8310C6" Association="Self.FK__ChaProduc__ChaTy__4A8310C6">
+          <AssociationSet Name="FK__ChaProduc__ChaTy__6CD828CA" Association="Self.FK__ChaProduc__ChaTy__6CD828CA">
             <End Role="ChaTypes" EntitySet="ChaTypes" />
             <End Role="ChaProducts" EntitySet="ChaProducts" />
           </AssociationSet>
-          <AssociationSet Name="FK__ChaProduc__Produ__498EEC8D" Association="Self.FK__ChaProduc__Produ__498EEC8D">
+          <AssociationSet Name="FK__ChaProduc__Produ__6BE40491" Association="Self.FK__ChaProduc__Produ__6BE40491">
             <End Role="Products" EntitySet="Products" />
             <End Role="ChaProducts" EntitySet="ChaProducts" />
           </AssociationSet>
-          <AssociationSet Name="FK__Offices__AddresI__3A4CA8FD" Association="Self.FK__Offices__AddresI__3A4CA8FD">
+          <AssociationSet Name="FK__ChaProduc__Statu__6EC0713C" Association="Self.FK__ChaProduc__Statu__6EC0713C">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="ChaProducts" EntitySet="ChaProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChaProduc__Stora__6DCC4D03" Association="Self.FK__ChaProduc__Stora__6DCC4D03">
+            <End Role="Storages" EntitySet="Storages" />
+            <End Role="ChaProducts" EntitySet="ChaProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Offices__AddresI__56E8E7AB" Association="Self.FK__Offices__AddresI__56E8E7AB">
             <End Role="Addres" EntitySet="Addres" />
             <End Role="Offices" EntitySet="Offices" />
           </AssociationSet>
-          <AssociationSet Name="FK__Offices__Storage__3B40CD36" Association="Self.FK__Offices__Storage__3B40CD36">
+          <AssociationSet Name="FK__Offices__Storage__57DD0BE4" Association="Self.FK__Offices__Storage__57DD0BE4">
             <End Role="Storages" EntitySet="Storages" />
             <End Role="Offices" EntitySet="Offices" />
           </AssociationSet>
-          <AssociationSet Name="FK__Products__Provid__43D61337" Association="Self.FK__Products__Provid__43D61337">
+          <AssociationSet Name="FK__Products__Provid__5F7E2DAC" Association="Self.FK__Products__Provid__5F7E2DAC">
             <End Role="Provides" EntitySet="Provides" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__Products__Storag__44CA3770" Association="Self.FK__Products__Storag__44CA3770">
+          <AssociationSet Name="FK__Products__Storag__607251E5" Association="Self.FK__Products__Storag__607251E5">
             <End Role="Storages" EntitySet="Storages" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__Products__TypePr__42E1EEFE" Association="Self.FK__Products__TypePr__42E1EEFE">
+          <AssociationSet Name="FK__Products__TypePr__5E8A0973" Association="Self.FK__Products__TypePr__5E8A0973">
             <End Role="TypeProducts" EntitySet="TypeProducts" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__Users__OfficeID__3F115E1A" Association="Self.FK__Users__OfficeID__3F115E1A">
+          <AssociationSet Name="FK__Users__OfficeID__5AB9788F" Association="Self.FK__Users__OfficeID__5AB9788F">
             <End Role="Offices" EntitySet="Offices" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK__Users__RoleID__40058253" Association="Self.FK__Users__RoleID__40058253">
+          <AssociationSet Name="FK__Users__RoleID__5BAD9CC8" Association="Self.FK__Users__RoleID__5BAD9CC8">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
@@ -284,7 +329,7 @@
           <Property Name="Street" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Nunhome" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Numkv" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Offices" Relationship="Self.FK__Offices__AddresI__3A4CA8FD" FromRole="Addres" ToRole="Offices" />
+          <NavigationProperty Name="Offices" Relationship="Self.FK__Offices__AddresI__56E8E7AB" FromRole="Addres" ToRole="Offices" />
         </EntityType>
         <EntityType Name="ChaProducts">
           <Key>
@@ -294,8 +339,13 @@
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="ProdKolvo" Type="Int32" Nullable="false" />
           <Property Name="ChaTypeID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ChaTypes" Relationship="Self.FK__ChaProduc__ChaTy__4A8310C6" FromRole="ChaProducts" ToRole="ChaTypes" />
-          <NavigationProperty Name="Products" Relationship="Self.FK__ChaProduc__Produ__498EEC8D" FromRole="ChaProducts" ToRole="Products" />
+          <Property Name="Time" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StorageID" Type="Int32" Nullable="false" />
+          <Property Name="StatuseID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ChaTypes" Relationship="Self.FK__ChaProduc__ChaTy__6CD828CA" FromRole="ChaProducts" ToRole="ChaTypes" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__ChaProduc__Produ__6BE40491" FromRole="ChaProducts" ToRole="Products" />
+          <NavigationProperty Name="Statuses" Relationship="Self.FK__ChaProduc__Statu__6EC0713C" FromRole="ChaProducts" ToRole="Statuses" />
+          <NavigationProperty Name="Storages" Relationship="Self.FK__ChaProduc__Stora__6DCC4D03" FromRole="ChaProducts" ToRole="Storages" />
         </EntityType>
         <EntityType Name="ChaTypes">
           <Key>
@@ -303,7 +353,7 @@
           </Key>
           <Property Name="ChaTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ChaTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="ChaProducts" Relationship="Self.FK__ChaProduc__ChaTy__4A8310C6" FromRole="ChaTypes" ToRole="ChaProducts" />
+          <NavigationProperty Name="ChaProducts" Relationship="Self.FK__ChaProduc__ChaTy__6CD828CA" FromRole="ChaTypes" ToRole="ChaProducts" />
         </EntityType>
         <EntityType Name="Offices">
           <Key>
@@ -313,9 +363,9 @@
           <Property Name="OfficeTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AddresID" Type="Int32" Nullable="false" />
           <Property Name="StorageID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Addres" Relationship="Self.FK__Offices__AddresI__3A4CA8FD" FromRole="Offices" ToRole="Addres" />
-          <NavigationProperty Name="Storages" Relationship="Self.FK__Offices__Storage__3B40CD36" FromRole="Offices" ToRole="Storages" />
-          <NavigationProperty Name="Users" Relationship="Self.FK__Users__OfficeID__3F115E1A" FromRole="Offices" ToRole="Users" />
+          <NavigationProperty Name="Addres" Relationship="Self.FK__Offices__AddresI__56E8E7AB" FromRole="Offices" ToRole="Addres" />
+          <NavigationProperty Name="Storages" Relationship="Self.FK__Offices__Storage__57DD0BE4" FromRole="Offices" ToRole="Storages" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__OfficeID__5AB9788F" FromRole="Offices" ToRole="Users" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -329,10 +379,10 @@
           <Property Name="TypeProductID" Type="Int32" Nullable="false" />
           <Property Name="ProviderID" Type="Int32" Nullable="false" />
           <Property Name="StorageID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ChaProducts" Relationship="Self.FK__ChaProduc__Produ__498EEC8D" FromRole="Products" ToRole="ChaProducts" />
-          <NavigationProperty Name="Provides" Relationship="Self.FK__Products__Provid__43D61337" FromRole="Products" ToRole="Provides" />
-          <NavigationProperty Name="Storages" Relationship="Self.FK__Products__Storag__44CA3770" FromRole="Products" ToRole="Storages" />
-          <NavigationProperty Name="TypeProducts" Relationship="Self.FK__Products__TypePr__42E1EEFE" FromRole="Products" ToRole="TypeProducts" />
+          <NavigationProperty Name="ChaProducts" Relationship="Self.FK__ChaProduc__Produ__6BE40491" FromRole="Products" ToRole="ChaProducts" />
+          <NavigationProperty Name="Provides" Relationship="Self.FK__Products__Provid__5F7E2DAC" FromRole="Products" ToRole="Provides" />
+          <NavigationProperty Name="Storages" Relationship="Self.FK__Products__Storag__607251E5" FromRole="Products" ToRole="Storages" />
+          <NavigationProperty Name="TypeProducts" Relationship="Self.FK__Products__TypePr__5E8A0973" FromRole="Products" ToRole="TypeProducts" />
         </EntityType>
         <EntityType Name="Provides">
           <Key>
@@ -340,7 +390,7 @@
           </Key>
           <Property Name="ProviderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProviderTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Products" Relationship="Self.FK__Products__Provid__43D61337" FromRole="Provides" ToRole="Products" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Products__Provid__5F7E2DAC" FromRole="Provides" ToRole="Products" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -348,7 +398,15 @@
           </Key>
           <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RolTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleID__40058253" FromRole="Roles" ToRole="Users" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleID__5BAD9CC8" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="StatuseID" />
+          </Key>
+          <Property Name="StatuseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatuseTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ChaProducts" Relationship="Self.FK__ChaProduc__Statu__6EC0713C" FromRole="Statuses" ToRole="ChaProducts" />
         </EntityType>
         <EntityType Name="Storages">
           <Key>
@@ -356,8 +414,9 @@
           </Key>
           <Property Name="StorageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StorageTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Offices" Relationship="Self.FK__Offices__Storage__3B40CD36" FromRole="Storages" ToRole="Offices" />
-          <NavigationProperty Name="Products" Relationship="Self.FK__Products__Storag__44CA3770" FromRole="Storages" ToRole="Products" />
+          <NavigationProperty Name="ChaProducts" Relationship="Self.FK__ChaProduc__Stora__6DCC4D03" FromRole="Storages" ToRole="ChaProducts" />
+          <NavigationProperty Name="Offices" Relationship="Self.FK__Offices__Storage__57DD0BE4" FromRole="Storages" ToRole="Offices" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Products__Storag__607251E5" FromRole="Storages" ToRole="Products" />
         </EntityType>
         <EntityType Name="TypeProducts">
           <Key>
@@ -365,7 +424,7 @@
           </Key>
           <Property Name="TypeProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TypeTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Products" Relationship="Self.FK__Products__TypePr__42E1EEFE" FromRole="TypeProducts" ToRole="Products" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Products__TypePr__5E8A0973" FromRole="TypeProducts" ToRole="Products" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -379,10 +438,10 @@
           <Property Name="Oname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="OfficeID" Type="Int32" Nullable="false" />
           <Property Name="RoleID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Offices" Relationship="Self.FK__Users__OfficeID__3F115E1A" FromRole="Users" ToRole="Offices" />
-          <NavigationProperty Name="Roles" Relationship="Self.FK__Users__RoleID__40058253" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="Offices" Relationship="Self.FK__Users__OfficeID__5AB9788F" FromRole="Users" ToRole="Offices" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__Users__RoleID__5BAD9CC8" FromRole="Users" ToRole="Roles" />
         </EntityType>
-        <Association Name="FK__Offices__AddresI__3A4CA8FD">
+        <Association Name="FK__Offices__AddresI__56E8E7AB">
           <End Role="Addres" Type="Self.Addres" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -396,7 +455,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ChaProduc__ChaTy__4A8310C6">
+        <Association Name="FK__ChaProduc__ChaTy__6CD828CA">
           <End Role="ChaTypes" Type="Self.ChaTypes" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -410,7 +469,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ChaProduc__Produ__498EEC8D">
+        <Association Name="FK__ChaProduc__Produ__6BE40491">
           <End Role="Products" Type="Self.Products" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -424,7 +483,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Offices__Storage__3B40CD36">
+        <Association Name="FK__ChaProduc__Statu__6EC0713C">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ChaProducts" Type="Self.ChaProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="StatuseID" />
+            </Principal>
+            <Dependent Role="ChaProducts">
+              <PropertyRef Name="StatuseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChaProduc__Stora__6DCC4D03">
+          <End Role="Storages" Type="Self.Storages" Multiplicity="1" />
+          <End Role="ChaProducts" Type="Self.ChaProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storages">
+              <PropertyRef Name="StorageID" />
+            </Principal>
+            <Dependent Role="ChaProducts">
+              <PropertyRef Name="StorageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Offices__Storage__57DD0BE4">
           <End Role="Storages" Type="Self.Storages" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -438,7 +523,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Users__OfficeID__3F115E1A">
+        <Association Name="FK__Users__OfficeID__5AB9788F">
           <End Role="Offices" Type="Self.Offices" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -452,7 +537,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__Provid__43D61337">
+        <Association Name="FK__Products__Provid__5F7E2DAC">
           <End Role="Provides" Type="Self.Provides" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -466,7 +551,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__Storag__44CA3770">
+        <Association Name="FK__Products__Storag__607251E5">
           <End Role="Storages" Type="Self.Storages" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -480,7 +565,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__TypePr__42E1EEFE">
+        <Association Name="FK__Products__TypePr__5E8A0973">
           <End Role="TypeProducts" Type="Self.TypeProducts" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -494,7 +579,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Users__RoleID__40058253">
+        <Association Name="FK__Users__RoleID__5BAD9CC8">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -508,7 +593,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="RaceStoreDbEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="RaceStoreDbEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Addres" EntityType="Self.Addres" />
           <EntitySet Name="ChaProducts" EntityType="Self.ChaProducts" />
           <EntitySet Name="ChaTypes" EntityType="Self.ChaTypes" />
@@ -516,42 +601,51 @@
           <EntitySet Name="Products" EntityType="Self.Products" />
           <EntitySet Name="Provides" EntityType="Self.Provides" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Statuses" EntityType="Self.Statuses" />
           <EntitySet Name="Storages" EntityType="Self.Storages" />
           <EntitySet Name="TypeProducts" EntityType="Self.TypeProducts" />
           <EntitySet Name="Users" EntityType="Self.Users" />
-          <AssociationSet Name="FK__Offices__AddresI__3A4CA8FD" Association="Self.FK__Offices__AddresI__3A4CA8FD">
+          <AssociationSet Name="FK__Offices__AddresI__56E8E7AB" Association="Self.FK__Offices__AddresI__56E8E7AB">
             <End Role="Addres" EntitySet="Addres" />
             <End Role="Offices" EntitySet="Offices" />
           </AssociationSet>
-          <AssociationSet Name="FK__ChaProduc__ChaTy__4A8310C6" Association="Self.FK__ChaProduc__ChaTy__4A8310C6">
+          <AssociationSet Name="FK__ChaProduc__ChaTy__6CD828CA" Association="Self.FK__ChaProduc__ChaTy__6CD828CA">
             <End Role="ChaTypes" EntitySet="ChaTypes" />
             <End Role="ChaProducts" EntitySet="ChaProducts" />
           </AssociationSet>
-          <AssociationSet Name="FK__ChaProduc__Produ__498EEC8D" Association="Self.FK__ChaProduc__Produ__498EEC8D">
+          <AssociationSet Name="FK__ChaProduc__Produ__6BE40491" Association="Self.FK__ChaProduc__Produ__6BE40491">
             <End Role="Products" EntitySet="Products" />
             <End Role="ChaProducts" EntitySet="ChaProducts" />
           </AssociationSet>
-          <AssociationSet Name="FK__Offices__Storage__3B40CD36" Association="Self.FK__Offices__Storage__3B40CD36">
+          <AssociationSet Name="FK__ChaProduc__Statu__6EC0713C" Association="Self.FK__ChaProduc__Statu__6EC0713C">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="ChaProducts" EntitySet="ChaProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChaProduc__Stora__6DCC4D03" Association="Self.FK__ChaProduc__Stora__6DCC4D03">
+            <End Role="Storages" EntitySet="Storages" />
+            <End Role="ChaProducts" EntitySet="ChaProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Offices__Storage__57DD0BE4" Association="Self.FK__Offices__Storage__57DD0BE4">
             <End Role="Storages" EntitySet="Storages" />
             <End Role="Offices" EntitySet="Offices" />
           </AssociationSet>
-          <AssociationSet Name="FK__Users__OfficeID__3F115E1A" Association="Self.FK__Users__OfficeID__3F115E1A">
+          <AssociationSet Name="FK__Users__OfficeID__5AB9788F" Association="Self.FK__Users__OfficeID__5AB9788F">
             <End Role="Offices" EntitySet="Offices" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK__Products__Provid__43D61337" Association="Self.FK__Products__Provid__43D61337">
+          <AssociationSet Name="FK__Products__Provid__5F7E2DAC" Association="Self.FK__Products__Provid__5F7E2DAC">
             <End Role="Provides" EntitySet="Provides" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__Products__Storag__44CA3770" Association="Self.FK__Products__Storag__44CA3770">
+          <AssociationSet Name="FK__Products__Storag__607251E5" Association="Self.FK__Products__Storag__607251E5">
             <End Role="Storages" EntitySet="Storages" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__Products__TypePr__42E1EEFE" Association="Self.FK__Products__TypePr__42E1EEFE">
+          <AssociationSet Name="FK__Products__TypePr__5E8A0973" Association="Self.FK__Products__TypePr__5E8A0973">
             <End Role="TypeProducts" EntitySet="TypeProducts" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__Users__RoleID__40058253" Association="Self.FK__Users__RoleID__40058253">
+          <AssociationSet Name="FK__Users__RoleID__5BAD9CC8" Association="Self.FK__Users__RoleID__5BAD9CC8">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
@@ -561,7 +655,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище RaceStoreDbModelContainer" CdmEntityContainer="RaceStoreDbEntities2">
+        <EntityContainerMapping StorageEntityContainer="Хранилище RaceStoreDbModelContainer" CdmEntityContainer="RaceStoreDbEntities3">
           <EntitySetMapping Name="Addres">
             <EntityTypeMapping TypeName="RaceStoreDbModel.Addres">
               <MappingFragment StoreEntitySet="Addres">
@@ -581,6 +675,9 @@
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="ProdKolvo" ColumnName="ProdKolvo" />
                 <ScalarProperty Name="ChaTypeID" ColumnName="ChaTypeID" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="StorageID" ColumnName="StorageID" />
+                <ScalarProperty Name="StatuseID" ColumnName="StatuseID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -629,6 +726,14 @@
               <MappingFragment StoreEntitySet="Roles">
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="RolTitle" ColumnName="RolTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statuses">
+            <EntityTypeMapping TypeName="RaceStoreDbModel.Statuses">
+              <MappingFragment StoreEntitySet="Statuses">
+                <ScalarProperty Name="StatuseID" ColumnName="StatuseID" />
+                <ScalarProperty Name="StatuseTitle" ColumnName="StatuseTitle" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

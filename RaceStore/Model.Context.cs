@@ -13,10 +13,10 @@ namespace RaceStore
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class RaceStoreDbEntities2 : DbContext
+    public partial class RaceStoreDbEntities3 : DbContext
     {
-        public RaceStoreDbEntities2()
-            : base("name=RaceStoreDbEntities2")
+        public RaceStoreDbEntities3()
+            : base("name=RaceStoreDbEntities3")
         {
         }
     
@@ -32,6 +32,7 @@ namespace RaceStore
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Provides> Provides { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<Statuses> Statuses { get; set; }
         public virtual DbSet<Storages> Storages { get; set; }
         public virtual DbSet<TypeProducts> TypeProducts { get; set; }
         public virtual DbSet<Users> Users { get; set; }

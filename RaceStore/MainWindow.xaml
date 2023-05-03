@@ -89,7 +89,18 @@
                     </StackPanel>
                 </TabItem.Header>
             <StackPanel Margin="10">
-            </StackPanel>
+                    <Label Content="Движения товаров" HorizontalAlignment="Center" FontSize="20" Foreground="LimeGreen" FontWeight="Bold" Margin="0,15,0,0"/>
+                    <DataGrid x:Name="ChaProdDG" MaxHeight="250"  AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Products.ProductTitle}"/>
+                            <DataGridTextColumn Header="Тип" Binding="{Binding ChaTypes.ChaTitle}"/>
+                            <DataGridTextColumn Header="Кол-во" Binding="{Binding ProdKolvo}"/>
+                            <DataGridTextColumn Header="Время заказа" Binding="{Binding Time}"/>
+                            <DataGridTextColumn Header="Склад" Binding="{Binding Storages.StorageTitle}"/>
+                            <DataGridTextColumn Header="Статус" Binding="{Binding Statuses.StatuseTitle}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
             </TabItem>
         </TabControl>
         <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,10,10,10" Height="50" Width="60" Click="Button_Click_3">

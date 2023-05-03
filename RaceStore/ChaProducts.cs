@@ -18,16 +18,23 @@ namespace RaceStore
         public int ProductID { get; set; }
         public int ProdKolvo { get; set; }
         public int ChaTypeID { get; set; }
+        public string Time { get; set; }
+        public int StorageID { get; set; }
+        public int StatuseID { get; set; }
     
         public virtual ChaTypes ChaTypes { get; set; }
         public virtual Products Products { get; set; }
-
+        public virtual Statuses Statuses { get; set; }
+        public virtual Storages Storages { get; set; }
         public ChaProducts() { }
-        public ChaProducts(int productID, int prodKolvo, int chaTypeID)
+        public ChaProducts(int productID, int prodKolvo, int chaTypeID, string time, int storageID, int statuseID)
         {
             ProductID = productID;
             ProdKolvo = prodKolvo;
             ChaTypeID = chaTypeID;
+            Time = time;
+            StorageID = storageID;
+            StatuseID = statuseID;
         }
     }
 }

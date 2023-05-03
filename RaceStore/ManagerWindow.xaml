@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:RaceStore"
         mc:Ignorable="d"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="RaceStore" Height="450" Width="900" WindowStartupLocation="CenterScreen">
+        Title="RaceStore" Height="500" Width="1000" WindowStartupLocation="CenterScreen">
     <Grid>
         <TabControl Style="{StaticResource MaterialDesignNavigationRailTabControl}" TabStripPlacement="Bottom" HorizontalContentAlignment="Center">
             <TabItem Width="100">
@@ -37,17 +37,37 @@
                         <TextBlock  HorizontalAlignment="Center" Text="Под заказ" />
                     </StackPanel>
                 </TabItem.Header>
-                <StackPanel Margin="10">
-                    <TextBox Name="SearchOrder" Width="400" Margin="5,10,15,5" materialDesign:HintAssist.Hint="Поиск..." Style="{StaticResource MaterialDesignOutlinedTextBox}" HorizontalAlignment="Left" KeyUp="OfficeTitleTb_KeyUp1"/>
-                    <DataGrid x:Name="ProductsOrderDG" MaxHeight="250"  AutoGenerateColumns="False" IsReadOnly="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Название" Binding="{Binding ProductTitle}"/>
-                            <DataGridTextColumn Header="Описание" Binding="{Binding Info}"/>
-                            <DataGridTextColumn Header="Цена" Binding="{Binding Price}"/>
-                            <DataGridTextColumn Header="Кол-во" Binding="{Binding Kolvo}"/>
-                            <DataGridTextColumn Header="Производитель" Binding="{Binding Provides.ProviderTitle}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Margin="0,0,10,0">
+                        <Label Content="Заказать товар" HorizontalAlignment="Center" FontSize="20" Foreground="LimeGreen" FontWeight="Bold" Margin="0,15,0,0"/>
+                        <TextBox Name="SearchOrder" Width="400" Margin="5,10,15,5" materialDesign:HintAssist.Hint="Поиск..." Style="{StaticResource MaterialDesignOutlinedTextBox}" KeyUp="OfficeTitleTb_KeyUp1"/>
+                        <DataGrid x:Name="ProductsOrderDG" MaxHeight="250"  AutoGenerateColumns="False" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Название" Binding="{Binding ProductTitle}"/>
+                                <DataGridTextColumn Header="Описание" Binding="{Binding Info}"/>
+                                <DataGridTextColumn Header="Цена" Binding="{Binding Price}"/>
+                                <DataGridTextColumn Header="Кол-во" Binding="{Binding Kolvo}"/>
+                                <DataGridTextColumn Header="Производитель" Binding="{Binding Provides.ProviderTitle}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button Margin="100,10,100,0"  Content="Заказать" Foreground="White" FontSize="16" Click="Button_Click_2"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Заказы" HorizontalAlignment="Center" FontSize="20" Foreground="LimeGreen" FontWeight="Bold" Margin="0,15,0,0"/>
+                        <DataGrid x:Name="ChaProdDG" MaxHeight="250"  AutoGenerateColumns="False" IsReadOnly="True"  MouseDoubleClick="mdk">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Название" Binding="{Binding Products.ProductTitle}"/>
+                                <DataGridTextColumn Header="Кол-во" Binding="{Binding ProdKolvo}"/>
+                                <DataGridTextColumn Header="Время заказа" Binding="{Binding Time}"/>
+                                <DataGridTextColumn Header="Склад" Binding="{Binding Storages.StorageTitle}"/>
+                                <DataGridTextColumn Header="Статус" Binding="{Binding Statuses.StatuseTitle}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox Name="c1" Content="Приход" FontSize="16" Margin="0,0,10,0" IsChecked="True" Click="c1_Click"/>
+                            <CheckBox Name="c2" Content="Расход" FontSize="16" Click="c2_Click"/>
+                        </StackPanel>
+                    </StackPanel>
                 </StackPanel>
             </TabItem>
         </TabControl>

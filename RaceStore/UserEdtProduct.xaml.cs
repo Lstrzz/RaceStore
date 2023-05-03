@@ -33,16 +33,26 @@ namespace RaceStore
         {
             if (ProductTb.Text != "" && ChaTypesTb.Text != "")
             {
-                Products products = Helper.GetContext().Products.FirstOrDefault(p => p.ProductTitle == ProductTb.Text&& p.StorageID == st);
-                if (ChaTypesTb.Text == "Поставка") products.Kolvo += Convert.ToInt32(ProdKolvoS.Value);
-                else if(ChaTypesTb.Text == "Возврат поставщику") products.Kolvo -= Convert.ToInt32(ProdKolvoS.Value);
-                else if (ChaTypesTb.Text == "Списание") products.Kolvo -= Convert.ToInt32(ProdKolvoS.Value);
-                else if (ChaTypesTb.Text == "Продажа") products.Kolvo -= Convert.ToInt32(ProdKolvoS.Value);
-                ChaTypes chaTypes = Helper.GetContext().ChaTypes.FirstOrDefault(c => c.ChaTitle == ChaTypesTb.Text);
-                ChaProducts chaProducts = new ChaProducts(products.ProductID,Convert.ToInt32(ProdKolvoS.Value),chaTypes.ChaTypeID);
-                Helper.GetContext().ChaProducts.Add(chaProducts);
-                Helper.GetContext().SaveChanges();
-                this.DialogResult = true;
+                Products products = Helper.GetContext().Products.FirstOrDefault(p => p.ProductTitle == ProductTb.Text && p.StorageID == st);
+                if (ChaTypesTb.Text == "Поставка")
+                {
+                    products.Kolvo += Convert.ToInt32(ProdKolvoS.Value);
+                    ChaTypes chaTypes = Helper.GetContext().ChaTypes.FirstOrDefault(c => c.ChaTitle == ChaTypesTb.Text);
+                    ChaProducts chaProducts = new ChaProducts(products.ProductID, Convert.ToInt32(ProdKolvoS.Value), chaTypes.ChaTypeID, DateTime.Now.ToString(), st, 5);
+                    Helper.GetContext().ChaProducts.Add(chaProducts);
+                    Helper.GetContext().SaveChanges();
+                    this.DialogResult = true;
+                }
+                if ((ChaTypesTb.Text == "Возврат поставщику" || ChaTypesTb.Text == "Возврат поставщику" || ChaTypesTb.Text == "Списание" || ChaTypesTb.Text == "Продажа") && products.Kolvo - ProdKolvoS.Value>=0)
+                {
+                    products.Kolvo -= Convert.ToInt32(ProdKolvoS.Value);
+                    ChaTypes chaTypes = Helper.GetContext().ChaTypes.FirstOrDefault(c => c.ChaTitle == ChaTypesTb.Text);
+                    ChaProducts chaProducts = new ChaProducts(products.ProductID, Convert.ToInt32(ProdKolvoS.Value), chaTypes.ChaTypeID, DateTime.Now.ToString(), st, 5);
+                    Helper.GetContext().ChaProducts.Add(chaProducts);
+                    Helper.GetContext().SaveChanges();
+                    this.DialogResult = true;
+                }
+                else if((ChaTypesTb.Text == "Возврат поставщику" || ChaTypesTb.Text == "Возврат поставщику" || ChaTypesTb.Text == "Списание" || ChaTypesTb.Text == "Продажа") && products.Kolvo - ProdKolvoS.Value < 0) MessageBox.Show("Товара Не хватает", "Ошибка");
             }
         }
     }

@@ -25,9 +25,6 @@ namespace RaceStore
     
         public virtual Offices Offices { get; set; }
         public virtual Roles Roles { get; set; }
-
-         public string FIO => Fname +" "+ Iname + " "+Oname;
-
         public Users() { }
         public Users(string logg, string pass, string fname, string iname, string oname, int officeID, int roleID)
         {
@@ -39,5 +36,6 @@ namespace RaceStore
             OfficeID = officeID;
             RoleID = roleID;
         }
+        public string FIO => Fname + " " + Iname + " " + Oname;
     }
 }
